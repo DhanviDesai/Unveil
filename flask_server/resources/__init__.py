@@ -1,1 +1,1 @@
-from .unveil_resources import GetUserResource
+from .unveil_resources import GetUserResource, GetReposResource
