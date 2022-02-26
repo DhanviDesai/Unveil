@@ -1,8 +1,10 @@
 .App {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
   text-align: center;
-  background-color: #2B3246;
+  background-color: #FBFAF5;
 }
 
 /*
@@ -19,6 +21,7 @@ HEX #FBFAF5 / RGB (251, 250, 245)
   display: flex;
   flex-flow: row wrap;
   justify-content:space-around;
+  background-color: #2B3246;
 }
 
 .title{
@@ -62,6 +65,42 @@ HEX #FBFAF5 / RGB (251, 250, 245)
 }
 
 /* Header css end */
+
+/* Main content css start */
+
+.main-content{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.user-name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.user-logo{
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+}
+
+.user-short{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25vw;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #8591A2;
+  margin-top: 24px;
+  margin-left: 24px;
+  color: #272622;
+}
+
+/* Main content css end */
 
 
 
