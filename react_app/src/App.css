@@ -79,12 +79,14 @@ HEX #FBFAF5 / RGB (251, 250, 245)
   flex-direction: row;
   align-items: center;
   font-family: 'Poppins', sans-serif;
+  margin-bottom: 16px;
 }
 
 .user-logo{
-  width: 24px;
-  height: 24px;
+  width: 52px;
+  height: 52px;
   margin-right: 16px;
+  border-radius: 50%;
 }
 
 .user-short{
