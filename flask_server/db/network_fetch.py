@@ -10,7 +10,6 @@ from flask_server.db import insert_into_db, insert_many_into_db
 
 from flask_server.model import User, Repo
 
-# TODO : Look into how to handle errors in ThreadPoolExecutor
 def fetch_repo_details(username,repo_url,page):
     try:
         query = "?"+urlencode({"per_page":config.RESULT_PER_PAGE,"page":page})
@@ -35,3 +34,5 @@ def fetch_user_details(username):
     with ThreadPoolExecutor(max_workers=100) as executor:
         [executor.submit(fetch_repo_details, user._id, user.repos_url, page) for page in range(1,pages+1)]
     return username
+
+# TODO : Write a batched script to get total lines of code of particular lanuage for each user

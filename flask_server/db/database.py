@@ -1,3 +1,4 @@
+from calendar import c
 from pymongo import MongoClient
 
 import flask_server.config as config
@@ -16,3 +17,6 @@ def fetch_from_db(collection, key, value):
     
 def fetch_many_from_db(collection, key, value):
     return db[collection].find({key:{"$in":[value]}},{"_id":0})
+
+def fetch_many_from_db_conditional(collection, key, value):
+    return db[collection].find().sort(key,value)
