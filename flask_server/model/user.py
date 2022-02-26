@@ -1,8 +1,11 @@
 class User(object):
-    def __init__(self,username,repo_count,repos_url):
+    def __init__(self, username, repo_count, repos_url, avatar_url, html_url):
         self._id = username
         self.repo_count = repo_count
         self.repos_url = repos_url
+        self.avatar_url = avatar_url
+        self.html_url = html_url
+
     
     # @property
     # def username(self):
