@@ -5,6 +5,7 @@
   height: 100vh;
   text-align: center;
   background-color: #FBFBFC;
+  overflow-x: hidden;
 }
 
 /*
@@ -89,6 +90,7 @@ HEX #FBFAF5 / RGB (251, 250, 245)
   padding: 16px;
   margin-left: 16px;
   margin-top: 16px;
+  margin-bottom: 16px;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 8px;
   font-family: 'Roboto', sans-serif;

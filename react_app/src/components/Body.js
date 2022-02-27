@@ -1,12 +1,17 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect, useRef} from 'react'
 import '../App.css'
 import UserShort from './UserShort'
+import LinearProgress from '@mui/material/LinearProgress';
+import Fade from '@mui/material/Fade';
 
 function Body() {
 
   const [username, setUsername] = useState("")
-  const [state, setState] = useState(true)
+  const [usersState, setUsersState] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState([])
+  const [inputValue, setInputValue] = useState("")
+  const userNameInput = useRef()
 
   useEffect(() => {
     getUsers().then(users => {
@@ -31,14 +36,35 @@ function Body() {
 
   const handleSearchUser = event => {
     setUsername(event.target.value)
+    setInputValue(event.target.value)
   }
 
   const handleKeyDown = event => {
     if(event.keyCode === 13){
-      console.log("Pressed enter")
-      console.log(username)
-      setState(false)
+      setUsersState(false)
+      setLoading(true)
+      fetchUser().then((user) => {
+        users.push(user)
+        setUsersState(true)
+        setLoading(false)
+        setInputValue("")
+        userNameInput.current.blur()
+      }).catch((error) => {
+        console.log(error)
+        alert("Something went wrong in fetching data, please check the entered username")
+        setUsersState(true)
+        setLoading(false)
+        setInputValue("")
+      })
+      
     }
+  }
+
+  const fetchUser = async () => {
+    let response = await fetch("/user/"+username)
+    if(! response.ok) throw new Error(response.status)
+    let newly_added_user = await response.json()
+    return newly_added_user
   }
 
   return (
@@ -47,12 +73,19 @@ function Body() {
         <h1 className="title">Unveil</h1>
         <div className='search-div'>
           <button className="search-button"/>
-          <input className="search-bar" type="text" placeholder="Search user" onChange={handleSearchUser} onKeyDown={handleKeyDown} />
+          <input className="search-bar" value={inputValue} ref={userNameInput} type="text" placeholder="Search user" onChange={handleSearchUser} onKeyDown={handleKeyDown} />
         </div>
       </div>
-      <div className={state?"main-content make-visible":"main-content make-invisible"} >
-        {returnUsers}
-      </div>
+      <div style={{marginTop:'8px'}}>
+        <Fade in={loading}>
+            <LinearProgress />
+          </Fade>
+      </div>      
+      <Fade in={usersState}>
+        <div className={state?"main-content make-visible":"main-content make-invisible-animation make-invisible"} >
+          {returnUsers}
+        </div>
+      </Fade>      
     </div>
     
   )
