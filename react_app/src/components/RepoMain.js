@@ -1,10 +1,42 @@
 import React, {useState, useEffect} from 'react'
 import UserInformation from './UserInformation'
 import RepoInformation from './RepoInformation'
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Bar } from 'react-chartjs-2';
+
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
 function RepoMain({_id, name, username, repo_count, avatar_url, followers, following, backClick}) {
 
     const [repos, setRepos] = useState([])
+
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart',
+          },
+        },
+      };
 
     useEffect(() => {
         fetchRepos().then((repos) => {
@@ -24,10 +56,38 @@ function RepoMain({_id, name, username, repo_count, avatar_url, followers, follo
         backClick()
     }
 
+    const languageMap = {}
+
     const returnRepos = []
-    repos.forEach(repo => {
-        returnRepos.push(<RepoInformation repo_name={repo["repo_name"]} repo_language={repo["language"]} stargazers_count={repo["stargazers_count"]} forks_count={repo["forks_count"]} />)
+    repos.forEach((repo, i) => {
+        if(repo["language"] !== undefined && repo["language"] !== null){
+            if(repo["language"] in languageMap){
+                languageMap[repo["language"]] = languageMap[repo["language"]] + 1
+            }else{
+                languageMap[repo["language"]] = 1
+            }
+        }
+        returnRepos.push(<RepoInformation key={i} repo_name={repo["repo_name"]} repo_language={repo["language"]} stargazers_count={repo["stargazers_count"]} forks_count={repo["forks_count"]} />)
     });
+
+    const labels = []
+    const values = []
+
+    for(const [key,value] of Object.entries(languageMap)){
+        labels.push(key)
+        values.push(value)
+    }
+
+    const data = {
+      labels,
+      datasets: [
+        {
+          label: 'Repositories',
+          data: values,
+          backgroundColor: 'rgba(205, 92, 92,0.5)',
+        },
+      ],
+    };
 
   return (
     <div>
@@ -41,6 +101,7 @@ function RepoMain({_id, name, username, repo_count, avatar_url, followers, follo
                 </div>
                 <div className="user-activity">
                     <img src={"https://ghchart.rshah.org/"+username} alt="username's Github chart" />
+                    <Bar options={options} data={data} />
                 </div>
                 <div className='repos-list'>
                     {returnRepos}

@@ -1,5 +1,4 @@
 import React, {useRef} from 'react'
-import Colors from '../colors.json'
 
 function RepoInformation({repo_name, repo_language, stargazers_count, forks_count}) {    
 
