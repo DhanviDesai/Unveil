@@ -3,11 +3,15 @@ import '../App.css'
 import UserShort from './UserShort'
 import LinearProgress from '@mui/material/LinearProgress';
 import Fade from '@mui/material/Fade';
+import RepoMain from './RepoMain';
 
 function Body() {
 
   const [username, setUsername] = useState("")
   const [usersState, setUsersState] = useState(true)
+  const [addedNewUser, setAddedNewUser] = useState(false)
+  const [repoState, setRepoState] = useState(false)
+  const [selectedUser, setSelectedUser] = useState({})
   const [loading, setLoading] = useState(false)
   const [users, setUsers] = useState([])
   const [inputValue, setInputValue] = useState("")
@@ -16,8 +20,9 @@ function Body() {
   useEffect(() => {
     getUsers().then(users => {
       setUsers(users)
+      setAddedNewUser(false)
     })
-  },[])
+  },[addedNewUser])
 
   const getUsers = async () => {
     let response = await fetch("/users")
@@ -25,8 +30,15 @@ function Body() {
     return users
   }
 
-  const clickedOnUser = (_id) => {
-    console.log(_id)
+  const clickedOnUser = (user) => {
+    setSelectedUser(user)
+    setUsersState(false)
+    setRepoState(true)
+  }
+
+  const clickedBack = () => {
+    setRepoState(false)
+    setUsersState(true)
   }
 
   var returnUsers = []
@@ -44,7 +56,7 @@ function Body() {
       setUsersState(false)
       setLoading(true)
       fetchUser().then((user) => {
-        users.push(user)
+        setAddedNewUser(true)
         setUsersState(true)
         setLoading(false)
         setInputValue("")
@@ -81,11 +93,14 @@ function Body() {
             <LinearProgress />
           </Fade>
       </div>      
-      <Fade in={usersState}>
-        <div className={usersState?"main-content make-visible":"main-content make-invisible-animation make-invisible"} >
+        <div className={usersState?"main-content make-visible":"make-invisible"} >
           {returnUsers}
         </div>
-      </Fade>      
+      < Fade in={repoState}>
+        <div className={repoState?"make-visible":"make-invisible"}>
+          <RepoMain _id={selectedUser["_id"]} name={selectedUser["name"]} username={selectedUser["username"]} repo_count={selectedUser["repo_count"]} avatar_url={selectedUser["avatar_url"]} followers={selectedUser["followers"]} following={selectedUser["following"]} backClick={clickedBack} />
+        </div>  
+      </Fade>   
     </div>
     
   )

@@ -1,28 +1,25 @@
 import React from 'react'
 import logo from '../github-logo.png'
+import UserInformation from './UserInformation'
 
 function UserShort({_id, name, username, repo_count, avatar_url, html_url, followers, following, onClick}) {
 
   const handleClick = () => {
-    onClick(_id)
+    onClick(
+      {
+        "_id":_id,
+        "name":name,
+        "username":username,
+        "repo_count":repo_count,
+        "avatar_url":avatar_url,
+        "followers":followers,
+        "following":following
+      })
   }
 
   return (
     <div className="user-short" onClick={handleClick}>
-      <div className="user-details">
-        <img className="user-avatar" src={avatar_url} alt={username}/>
-        <div className="names-container">
-          <span className="name">{name}</span>
-          <span className="username">{username}</span>
-        </div>
-      </div>
-      <div className="user-extra">
-        <span><strong className="bold">{repo_count}</strong> public repos</span>
-        ·
-        <span><strong className="bold">{followers}</strong> followers</span>
-        ·
-        <span><strong className="bold">{following}</strong> following</span>
-      </div>
+      <UserInformation name={name} username={username} repo_count={repo_count} avatar_url={avatar_url} followers={followers} following={following} avatar_class_name="user-avatar" />
       <div className="user-footer">
         <a href={html_url}>
           <img className="git-logo" src={logo} alt="git logo"/>
