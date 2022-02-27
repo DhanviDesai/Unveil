@@ -15,6 +15,14 @@ HEX #FBFAF5 / RGB (251, 250, 245)
 
 */
 
+.make-visible{
+  visibility: visible;
+}
+
+.make-invisible{
+  visibility: hidden;
+}
+
 /* Header css start */
 .search-wrapper{
   width: 100vw;
