@@ -4,7 +4,7 @@
   width: 100vw;
   height: 100vh;
   text-align: center;
-  background-color: #FBFAF5;
+  background-color: #FBFBFC;
 }
 
 /*
@@ -74,32 +74,74 @@ HEX #FBFAF5 / RGB (251, 250, 245)
   justify-content: space-around;
 }
 
-.user-name{
+.user-short{
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 16px;
+  flex-flow: column wrap;
+  min-width: 40vw;
+  padding: 16px;
+  margin-left: 16px;
+  margin-top: 16px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
 }
 
-.user-logo{
-  width: 52px;
-  height: 52px;
-  margin-right: 16px;
+.user-details{
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar{
+  width: 108px;
+  height: 108px;
+  float: left;
   border-radius: 50%;
 }
 
-.user-short{
+.names-container{
+  padding-left: 16px;
+  padding-top: 16px;
+}
+
+.name{
+  display: block;
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.username{
+  display: block;
+  font-size: 20px;
+  color: gray;
+  text-align: start;
+}
+
+.user-extra{
+  padding-top: 16px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 25vw;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #8591A2;
-  margin-top: 24px;
-  margin-left: 24px;
-  color: #272622;
+  justify-content: space-around;
+}
+
+.bold{
+  color: black;
+}
+
+.user-extra span{
+  font-size: 14px;
+  color: gray;
+}
+
+.user-footer{
+  padding-top: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.git-logo{
+  width: 24px;
+  height: 24px;
 }
 
 /* Main content css end */

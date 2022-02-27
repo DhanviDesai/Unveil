@@ -7,16 +7,16 @@ import flask_server.config as config
 
 class UnveilRepo:
     def getUser(self,username):
-        user_details = fetch_from_db(config.USER_COLLECTION, config.ID, username)
+        user_details = fetch_from_db(config.USER_COLLECTION, config.ID, username.lower())
         if user_details is not None:
             return user_details
         else:
-            response = fetch_user_details(username)
+            response = fetch_user_details(username.lower())
             if response == username:
-                return fetch_from_db(config.USER_COLLECTION, config.ID, username)
+                return fetch_from_db(config.USER_COLLECTION, config.ID, username.lower())
     
     def getRepos(self,username):
-        cursor = fetch_many_from_db(config.REPOS_COLLECTION, config.USERNAME, username)
+        cursor = fetch_many_from_db(config.REPOS_COLLECTION, config.USERNAME, username.lower())
         for doc in cursor:
             yield doc
     

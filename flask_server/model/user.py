@@ -1,10 +1,14 @@
 class User(object):
-    def __init__(self, username, repo_count, repos_url, avatar_url, html_url):
-        self._id = username
+    def __init__(self, id_name, name, username, repo_count, repos_url, avatar_url, html_url, followers, following):
+        self._id = id_name
+        self.username = username
         self.repo_count = repo_count
         self.repos_url = repos_url
         self.avatar_url = avatar_url
         self.html_url = html_url
+        self.followers = followers
+        self.following = following
+        self.name = name
 
     
     # @property

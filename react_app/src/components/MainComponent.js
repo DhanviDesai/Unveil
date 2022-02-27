@@ -19,7 +19,7 @@ function MainComponent() {
 
     var returnUsers = []
     users.map((user,i) => {
-        returnUsers.push(<UserShort username={user["_id"]} avatar_url={user["avatar_url"]} html_url={user["html_url"]} repo_count={user["repo_count"]} />)
+        returnUsers.push(<UserShort name={user["name"]} username={user["username"]} avatar_url={user["avatar_url"]} html_url={user["html_url"]} repo_count={user["repo_count"]} followers={user["followers"]} following={user["following"]} />)
     })
     
 

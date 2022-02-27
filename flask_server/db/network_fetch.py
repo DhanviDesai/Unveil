@@ -28,7 +28,7 @@ def fetch_repo_details(username,repo_url,page):
 def fetch_user_details(username):
     user_url = urljoin(config.USER_GITHUB_API,username)
     user_details = requests.get(user_url,headers=config.AUTHORIZATION_HEADER).json()
-    user = User(user_details["login"], user_details["public_repos"], user_details["repos_url"], user_details["avatar_url"], user_details["html_url"])
+    user = User(username, user_details["name"], user_details["login"], user_details["public_repos"], user_details["repos_url"], user_details["avatar_url"], user_details["html_url"], user_details["followers"], user_details["following"])
     insert_into_db(config.USER_COLLECTION, vars(user))
     pages = math.ceil(user.repo_count / config.RESULT_PER_PAGE)
     with ThreadPoolExecutor(max_workers=100) as executor:
