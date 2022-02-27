@@ -82,7 +82,7 @@ function Body() {
           </Fade>
       </div>      
       <Fade in={usersState}>
-        <div className={state?"main-content make-visible":"main-content make-invisible-animation make-invisible"} >
+        <div className={usersState?"main-content make-visible":"main-content make-invisible-animation make-invisible"} >
           {returnUsers}
         </div>
       </Fade>      
