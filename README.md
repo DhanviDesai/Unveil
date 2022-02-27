@@ -22,7 +22,7 @@ Two collections are used for user information and repository information
 #### `REPOS_COLLECTION={your repos collection name}`
 
 Github Personal Access Token is needed to query using Github API without 60 rate limit. Using Personal Access Token gives us a rate limit of 5000 per hour which should be enough for our use. This should also be set up in the environment as
-#### `PERSONAL_ACCESS_TOKEN={your Github account personal access token`
+#### `PERSONAL_ACCESS_TOKEN={your Github account personal access token}`
 
 After installation of required packages and once the environment is set up. 
 
